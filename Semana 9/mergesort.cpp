@@ -1,12 +1,29 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
 void merge(int *L, int *R, int *A, int n){
-    //TODO: Implementar el metodo merge
     int left_size = n/2;
     int right_size = n - left_size;
     int i = 0, j = 0, k = 0;
-    
+    while(i < left_size && j < right_size ){
+        if( L[i] < R[j] ){
+            A[k] = L[i];
+            k++; i++;
+        }else{
+            A[k] = R[j];
+            k++; j++;
+        }
+    }
+
+    while(i < left_size){
+        A[k] = L[i];
+        k++; i++;
+    }
+
+    while(j < right_size){
+        A[k] = R[j];
+        k++; j++;
+    }    
 }
 
 void mergeSort(int *A, int n){
@@ -40,6 +57,13 @@ void mergeSort(int *A, int n){
     }
 }
 
+void printArray(int *A, int n){
+    for(int i = 0 ; i < n ; ++i ){
+        cout<<A[i]<<" ";
+    }
+    cout<<endl;
+}
+
 int main() {
 
     int n;
@@ -48,8 +72,9 @@ int main() {
     for( int i = 0 ; i < n; ++i ){
         cin>>A[i];
     }
+    printArray(A, n);
     mergeSort(A, n);
-
+    printArray(A,n);
     delete []A;
     return 0;
 }
